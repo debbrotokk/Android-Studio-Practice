@@ -1,0 +1,35 @@
+1st create a layout and design 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/custometoast_id"
+    >
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="66dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:text="ki sundor texr"
+        android:textAlignment="center"
+        android:textColor="#FF4081"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+
+
+    public void onclick(View view) {
+        LayoutInflater inflater=getLayoutInflater();
+      View Customeview= inflater.inflate(R.layout.tostlayout,(ViewGroup) findViewById(R.id.custometoast_id));
+        Toast toast= new Toast(MainActivity4.this);
+toast.setDuration(Toast.LENGTH_LONG);
+toast.setGravity(Gravity.CENTER,0,80);
+toast.setView(Customeview);
+toast.show();
+      }

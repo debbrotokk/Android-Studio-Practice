@@ -1,0 +1,9 @@
+// je activity ke rotate korbo manimest a giya tar screenOrientation dite hbe..
+
+
+  <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+
+            >

@@ -1,0 +1,52 @@
+<TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timepicker"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick TIME"
+        android:id="@+id/button"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="data here"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:textColor="@color/black"
+        />
+
+
+public class MainActivity4 extends AppCompatActivity {
+    TextView textView;
+    Button button;
+   TimePicker timepicker;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main4);
+        textView = (TextView) findViewById(R.id.textView);
+        button = (Button) findViewById(R.id.button);
+        timepicker=(TimePicker) findViewById(R.id.timepicker);
+        timepicker.setIs24HourView(false);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String time=timepicker.getCurrentMinute()+" / "+timepicker.getCurrentHour();
+                textView.setText(time);
+            }
+        });
+
+
+
+
+
+
+
+    }
+}
+
+

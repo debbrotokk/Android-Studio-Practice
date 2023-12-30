@@ -1,0 +1,81 @@
+<!--    android:cursorVisible="false"
+android:textCursorDrawable="@null"
+-->
+    <EditText
+         android:maxLength="2"
+        android:id="@+id/edtext"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:hint="mamakiculikho"
+        android:textStyle="bold"
+        android:textColor="#B2FF59"
+        android:inputType="numberDecimal"
+        android:backgroundTint="#7C4DFF"
+        android:textColorHint="#FF4081"
+        android:textCursorDrawable="@color/yellow"
+        />
+
+
+
+public class MainActivity3 extends AppCompatActivity{
+   private Button button1,button2;
+   private EditText editText;
+   String string;
+  double aDouble;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main3);
+        button1=(Button) findViewById(R.id.button1);
+        button2=(Button) findViewById(R.id.button2);
+        editText=(EditText)findViewById(R.id.edtext);
+
+        Deb deb=new Deb();
+        // Deb is class name
+        button1.setOnClickListener(deb);
+        button2.setOnClickListener(deb);
+
+
+    }
+
+class Deb implements View.OnClickListener{
+
+
+    @Override
+    public void onClick(View v) {
+
+        try {
+            aDouble = Double.parseDouble(editText.getText().toString());
+            if(v.getId()==R.id.button2)
+            {
+                button2.setText(""+aDouble);
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(MainActivity3.this,"MAMU NUMBER DE ",Toast.LENGTH_LONG).show();
+
+
+        }
+
+
+
+
+    }
+}
+
+}
+
+
+
+ if(string.isEmpty())
+        {
+            editText.setError("mama akta to number de");
+           // textView.setText("kicu de");
+            editText.requestFocus();
+         //  editText.getFreezesText();
+        }
+
+
+
+

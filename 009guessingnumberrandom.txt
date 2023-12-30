@@ -1,0 +1,54 @@
+   <EditText
+        android:inputType="number"
+        android:id="@+id/edtext"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:hint="enter a number"
+        android:textColorHint="#40000000" />
+
+    <Button
+        android:onClick="onclick"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CLICK" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="mama tik hoyni"
+        android:textSize="20sp"
+        android:id="@+id/textview"
+        />
+
+
+
+
+public class MainActivity4 extends AppCompatActivity {
+    EditText editText;
+    TextView textView;
+    Button button;
+    int num;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main4);
+        editText=(EditText) findViewById(R.id.edtext);
+        textView=(TextView) findViewById(R.id.textview);
+        button=(Button) findViewById(R.id.button);
+    }
+    public void onclick(View view) {
+
+        num=Integer.parseInt(editText.getText().toString());
+        Random random=new Random();
+      int ran=  random.nextInt(3)+1; // 0,1,2 +1 == 1,2,3
+      if(ran==num)
+      {
+          textView.setText("obaba tmi tik dicho to");
+      }
+      else {  textView.setText("o sona hoyni to");
+
+      }
+    }
+}

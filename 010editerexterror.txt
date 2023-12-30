@@ -1,0 +1,23 @@
+public void onclick(View view) {
+      String string=editText.getText().toString();
+
+        Random random=new Random();
+      int ran=  random.nextInt(3)+1; // 0,1,2 +1 == 1,2,3
+
+        if(string.isEmpty())
+        {
+            editText.setError("mama akta to number de");
+           // textView.setText("kicu de");
+            editText.requestFocus();
+         //  editText.getFreezesText();
+        }
+     else if(ran==num)
+      {    num=Integer.parseInt(string);
+          textView.setText("obaba tmi tik dicho to");
+      }
+      else {
+            num=Integer.parseInt(string);
+          textView.setText("o sona hoyni to");
+
+      }
+    }

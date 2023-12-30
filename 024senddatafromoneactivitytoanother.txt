@@ -1,0 +1,30 @@
+1st activity
+
+    public void onclick(View view) {
+        Intent intent=new Intent(this,MainActivity2.class);
+        intent.putExtra("iamkey","i am value mama");
+        intent.putExtra("tag","mui bangla desi");
+        startActivity(intent);
+
+    }
+2nd activity
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ami onno jaiga theke aichi re"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:textSize="20sp"
+        />
+
+TextView textView;
+textView=findViewById(R.id.textView);
+Bundle bundle=getIntent().getExtras();
+if (bundle !=null){
+  String value= bundle.getString("iamkey");
+  String value2=bundle.getString("tag");
+  textView.setText(value +"\n"+value2);
+}
+

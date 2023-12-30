@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity4"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+
+    android:layout_margin="10dp"
+    >
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="data here"
+    android:textSize="30sp"
+    android:gravity="center_horizontal"
+    android:id="@+id/textView"
+android:textColor="@color/black"
+    />
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Pick TIME"
+    android:id="@+id/button"
+    />
+    <DatePicker
+        android:background="@color/black"
+        android:calendarTextColor="@color/white"
+
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datapicker"
+        />
+
+</LinearLayout>
+
+// java=======================
+
+public class MainActivity4 extends AppCompatActivity {
+  TextView textView;
+  Button button;
+  DatePicker datapicker;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main4);
+        textView=(TextView)findViewById(R.id.textView);
+        button=(Button) findViewById(R.id.button);
+        datapicker=(DatePicker) findViewById(R.id.datapicker);
+        textView.setText(currentdate());
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+textView.setText(currentdate());
+            }
+        });
+
+    }
+    String currentdate(){
+
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append(datapicker.getDayOfMonth()+" / ");
+        stringBuilder.append((datapicker.getMonth()+1)+" / ");
+        stringBuilder.append(datapicker.getYear());
+     return  stringBuilder.toString();
+
+    }
+
+}
+
+
+

@@ -1,0 +1,50 @@
+
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="name"
+         />
+<Button
+    android:onClick="onclick"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:text="button"
+    android:id="@+id/button"
+    />
+
+   
+
+
+public class MainActivity2 extends AppCompatActivity {
+    EditText editText;
+    Button button;
+    String str;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+
+        editText=findViewById(R.id.editText);
+        button=findViewById(R.id.button);
+
+
+
+
+    }
+
+    public void onclick(View view) {
+
+        Toast.makeText(this,"hello " + editText.getText().toString(),Toast.LENGTH_LONG).show();
+
+ Toast toast=Toast.makeText(MainActivity3.this,"tost show kr",Toast.LENGTH_LONG);
+   toast.setGravity(Gravity.CENTER,0,0);
+ toast.show();
+
+
+    }
+}

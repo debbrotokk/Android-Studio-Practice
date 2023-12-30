@@ -1,0 +1,58 @@
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="data here"
+    android:textSize="30sp"
+    android:gravity="center_horizontal"
+    android:id="@+id/textView"
+android:textColor="@color/black"
+    />
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Pick TIME"
+    android:id="@+id/button"
+    />
+
+
+public class MainActivity4 extends AppCompatActivity implements View.OnClickListener {
+    TextView textView;
+    Button button;
+    DatePickerDialog datapickerdialoge;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main4);
+        textView = (TextView) findViewById(R.id.textView);
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        DatePicker datapicker;
+
+        datapicker=new DatePicker(this);
+        int currentday= datapicker.getDayOfMonth();
+        int currentmonth=datapicker.getMonth()+1;
+        int currentyear=datapicker.getYear();
+
+        datapickerdialoge=new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofmounth) {
+
+                       textView.setText(dayofmounth+"\t/"+(month+1)+"\t/"+year);
+
+                    }
+                },currentyear,currentmonth,currentday );
+
+        datapickerdialoge.show();
+
+    }
+}
+
+

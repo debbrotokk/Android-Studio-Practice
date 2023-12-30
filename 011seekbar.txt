@@ -1,0 +1,42 @@
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:thumbTint="@color/yellow"
+        android:max="10"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="357dp"
+        android:layout_height="79dp" />
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Volume"
+        android:textSize="20sp"
+        android:id="@+id/seektext"
+        />
+
+
+ seektext=(TextView) findViewById(R.id.seektext);
+        SeekBar seekBar;
+        seekBar=(SeekBar) findViewById(R.id.seekBar);
+        seektext.setText("Volume "+seekBar.getProgress()+"/ \t" +seekBar.getMax());
+      seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+        seektext.setText("Volume "+progress+"/ \t" +seekBar.getMax());
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        Toast.makeText(MainActivity4.this,"onStartTrackingTouch ",Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        Toast.makeText(MainActivity4.this,"onStopTrackingTouch ",Toast.LENGTH_SHORT).show();
+
+
+    }
+
+      });

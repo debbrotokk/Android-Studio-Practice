@@ -1,0 +1,38 @@
+<Switch
+    android:drawableLeft="@drawable/logo"
+    android:padding="20sp"
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/switc"
+    android:background="#EAEA1A"
+    android:thumbTint="#FF4081"
+    android:text="wifi"
+    android:textSize="20sp"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="mama tik hoyni"
+        android:textSize="20sp"
+        android:id="@+id/switctext"
+        />
+
+  TextView switctext;
+        Switch switc;
+        switc=(Switch) findViewById(R.id.switc);
+        switctext=findViewById(R.id.switctext);
+        switctext.setText("off");
+     switc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+         @Override
+         public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
+             if (ischecked){
+                 switctext.setText("on");
+             }
+             else {
+                 switctext.setText("off");
+             }
+         }
+     });
+

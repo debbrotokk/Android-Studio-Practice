@@ -1,0 +1,35 @@
+<RatingBar
+    android:id="@+id/rattingbar"
+    android:layout_marginTop="20dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:numStars="5"
+    android:rating="3"
+    android:stepSize="1"
+android:progressBackgroundTint="@color/yellow"
+    android:progressTint="#FB0D0D"
+    />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="mama tik hoyni"
+        android:textSize="20sp"
+        android:id="@+id/ratingtext"
+        />
+
+
+rattingbar=(RatingBar)findViewById(R.id.rattingbar);
+        ratingtext=(TextView) findViewById(R.id.ratingtext);
+
+        ratingtext.setText("Value "+rattingbar.getProgress());
+        rattingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
+                ratingtext.setText("Value "+(int)rating);
+
+            }
+        });
+

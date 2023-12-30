@@ -1,0 +1,45 @@
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:src="@drawable/logo"
+    android:id="@+id/imageView"
+    />
+ <ZoomControls
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:id="@+id/zoomcontrols"
+     android:background="@color/black"
+     android:backgroundTint="@color/yellow"
+
+     />
+
+
+     ImageView imageView;
+        ZoomControls zoomControls;
+        imageView=(ImageView)findViewById(R.id.imageView);
+        zoomControls=(ZoomControls) findViewById(R.id.zoomcontrols);
+        zoomControls.setOnZoomInClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float x=imageView.getScaleX();
+                float y=imageView.getScaleY();
+                imageView.setScaleX((float)x+1);
+                imageView.setScaleY((float)y+1);
+
+
+            }
+        });
+
+zoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        float x=imageView.getScaleX();
+        float y=imageView.getScaleY();
+        if (x>1 && y>1){
+        imageView.setScaleX((float)x-1);
+        imageView.setScaleY((float)y-1);
+
+        }
+    }
+});

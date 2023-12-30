@@ -1,0 +1,22 @@
+select project -> app -> src-> main -> new -> dicectory -> assets(name dite hbe) -> font name a akta folder kre tarmodde sob font rekhe assets dicrectory te paste korte hbe 
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="data here"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:textColor="@color/black"
+        />
+
+       
+
+
+ 	TextView textView;
+        Typeface typeface;
+        textView = (TextView) findViewById(R.id.textView);
+        typeface =Typeface.createFromAsset(getAssets(), "font/digital_7.ttf");
+        textView .setTypeface(typeface);
+

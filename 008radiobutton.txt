@@ -1,0 +1,91 @@
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Buttoon2"
+        android:layout_margin="10dp"
+        android:id="@+id/button2"
+        />
+
+    <RadioGroup
+        android:background="@color/yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radiogroup"
+        >
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="mama" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="caca" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="khala" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/textview"
+        android:text="aaaaaamama"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        />
+
+
+
+public class MainActivity3 extends AppCompatActivity{
+   private Button button1,button2;
+
+   String string;
+  double aDouble;
+  TextView textView;
+  RadioGroup radioGroup;
+  RadioButton radioButton;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main3);
+        button1=(Button) findViewById(R.id.button1);
+        button2=(Button) findViewById(R.id.button2);
+        radioGroup=(RadioGroup)findViewById(R.id.radiogroup);
+     
+       
+
+
+        textView=(TextView)findViewById(R.id.textview);
+
+
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            int selected=    radioGroup.getCheckedRadioButtonId();
+           radioButton=(RadioButton) findViewById(selected);
+                string=radioButton.getText().toString();
+            textView.setText(""+string);
+
+            }
+        });
+
+
+
+
+    }
+}
+

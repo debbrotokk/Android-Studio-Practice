@@ -1,0 +1,37 @@
+  AlertDialog alertDialog;
+  AlertDialog.Builder alertdialogbuilder;
+
+
+
+ @Override
+    public void onBackPressed() {
+       alertdialogbuilder= new AlertDialog.Builder(this);
+       alertdialogbuilder.setTitle("Alert mama");
+       alertdialogbuilder.setMessage("O Mama ber hba naki ");
+       alertdialogbuilder.setIcon(R.drawable.logo);
+      alertdialogbuilder.setCancelable(false);
+      // baire khotaw click korle katbe na
+
+       alertdialogbuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+               finish();
+           }
+       });
+       alertdialogbuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+              dialogInterface.dismiss();
+           }
+       });
+       alertdialogbuilder.setNeutralButton("Cancele", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+               dialogInterface.cancel();
+
+           }
+       });
+        alertDialog=alertdialogbuilder.create();
+        alertDialog.show();
+
+    }
