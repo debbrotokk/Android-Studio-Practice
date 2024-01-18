@@ -11,7 +11,11 @@
         android:textAlignment="center"
         android:textIsSelectable="true"
         android:textColorHighlight="#FFFF00"
-          android:drawableLeft="@drawable/logo"
-        
+         android:drawableLeft="@drawable/logo"
+         android:singleLine="true"
+        android:textIsSelectable="true"
+        android:textAllCaps="true"
+        android:typeface="serif"
+        android:weightSum="3"
         />
     
