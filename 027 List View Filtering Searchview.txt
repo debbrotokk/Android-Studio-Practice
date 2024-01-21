@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".listview"
+    android:orientation="vertical"
+    android:background="@color/white"
+
+    >
+    <SearchView
+        android:layout_width="match_parent"
+        android:queryHint="Enter name"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchview"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        >
+
+
+    </SearchView>
+
+
+    <ListView
+
+        android:listSelector="#3C000000"
+        android:dividerHeight="2dp"
+        android:divider="#69F0AE"
+        android:id="@+id/listview"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        />
+
+
+</LinearLayout>
+
+
+
+// item  
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/listviewlayout"
+    >
+
+    <TextView
+        android:textColorHint="@color/black"
+        android:id="@+id/listviewtext"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Debbroto"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:background="#FF4081"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        />
+</LinearLayout>
+
+
+// string
+ <string-array name="countryname">
+        <item> Afghanistan</item>
+        <item> Samoa Américaines</item>
+        <item> Samoa Américaines</item>
+        <item> Andorre</item>
+        <item>Angola </item>
+        <item>Anguilla </item>
+        <item>Antarctique </item>
+        <item> Antigua-et-Barbuda</item>
+        <item> Bangladesh</item>
+        <item>Argentine </item>
+        <item> koria</item>
+        <item> Arménie</item>
+        <item> INDIA</item>
+        <item> Aruba</item>
+        <item> Australie</item>
+    </string-array>
+
+
+//java 
+
+package com.to.learnanisul;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class listview extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listview);
+
+
+        ListView listView;
+        listView=findViewById(R.id.listview);
+
+        SearchView searchView;
+        searchView=findViewById(R.id.searchview);
+        searchView.clearFocus();
+        String[] countryname1=getResources().getStringArray(R.array.countryname);
+
+        //  String[] countryname1={"debbroto","kumar","karmokar"};
+
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(listview.this,R.layout.listviewitem,R.id.listviewtext,countryname1);
+
+        // aita korleo hbe
+
+        // ArrayAdapter<String> adapter=new ArrayAdapter<String>(listview.this,R.layout.listviewitem,R.id.listviewtext,getResources().getStringArray(R.array.countryname));
+
+        listView.setAdapter(adapter);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+
+                return false;
+            }
+        });
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Toast.makeText(listview.this,"item position "+(position+1),Toast.LENGTH_SHORT).show();
+                String  value=countryname1[position];
+                Toast.makeText(listview.this,value,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }}
+ssss

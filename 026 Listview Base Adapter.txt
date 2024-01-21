@@ -1,0 +1,185 @@
+    <ListView
+
+        android:listSelector="#3C000000"
+        android:dividerHeight="2dp"
+        android:divider="#69F0AE"
+        android:id="@+id/listview"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        />
+
+
+
+// list item==================
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#E040FB"
+    android:orientation="horizontal"
+    android:id="@+id/listviewlayout"
+    android:weightSum="6"
+    android:layout_margin="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:src="@drawable/napal"
+
+        />
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/listviewtexthead"
+            android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Debbroto"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+
+            />
+
+        <TextView
+            android:id="@+id/listviewtextbody"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:text="debbroto kumar karmokar"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
+// string  ==================
+
+
+   <string-array name="countryname">
+        <item> Bangladesh</item>
+        <item>India</item>
+        <item>Pakistan</item>
+        <item> Vutan</item>
+        <item> napal</item>
+    </string-array>
+
+//================
+
+
+package com.to.learnanisul;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class listview extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listview);
+
+
+
+        ListView listView;
+        listView=findViewById(R.id.listview);
+
+
+
+        int flag[]={
+                R.drawable.bdflag,R.drawable.indianflag,R.drawable.pkflaf,R.drawable.vutan,R.drawable.napal };
+        String [] countryname1=getResources().getStringArray(R.array.countryname);
+
+
+
+        Customeadapdet adapder= new Customeadapdet(listview.this,countryname1,flag);
+        listView.setAdapter(adapder);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(listview.this,countryname1[i],Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+    }
+   class Customeadapdet extends BaseAdapter {
+       int []flags;
+     String [] coubtryname3;
+
+
+      Context context;
+
+
+      LayoutInflater layoutInflater;
+       Customeadapdet( Context context,String[] coubtryname3,int[] flags){
+           this.context =context;
+           this.coubtryname3 = coubtryname3;
+           this.flags=flags;
+
+       }
+
+
+       @Override
+       public int getCount() {
+           return coubtryname3.length;
+       }
+
+       @Override
+       public Object getItem(int i) {
+           return null;
+       }
+
+       @Override
+       public long getItemId(int i) {
+           return 0;
+       }
+
+       @Override
+       public View getView(int position, View covertview, ViewGroup viewGroup) {
+           if(covertview==null){
+          layoutInflater=(LayoutInflater)    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            covertview=  layoutInflater.inflate(R.layout.listviewitem,viewGroup,false);
+           }
+         ImageView imageView= covertview.findViewById(R.id.imageview);
+           TextView listviewtexthead = covertview.findViewById(R.id.listviewtexthead);
+
+           TextView listviewtextbody= covertview.findViewById(R.id.listviewtextbody);
+
+imageView.setImageResource(flags[position]);
+listviewtexthead.setText(coubtryname3[position]);
+           return covertview;
+       }
+   }
+}
