@@ -1,0 +1,87 @@
+//   manni fest permision
+
+   <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+
+
+// allow call permision
+
+// aita main activity dile valo hbe
+
+
+  if (ContextCompat.checkSelfPermission(Progressbar.this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(Progressbar.this,new String[]{Manifest.permission.CALL_PHONE},PERMISSION_CODE);
+
+        }
+
+
+//
+
+ <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="enter youber"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+
+
+
+
+import android.Manifest;
+
+
+
+
+ Button button=findViewById(R.id.button2);
+        EditText editTextNumber=findViewById(R.id.editTextNumber);
+
+        if (ContextCompat.checkSelfPermission(Progressbar.this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(Progressbar.this,new String[]{Manifest.permission.CALL_PHONE},PERMISSION_CODE);
+
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number=editTextNumber.getText().toString();
+                String callPermission = Manifest.permission.CALL_PHONE;
+
+
+                try {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    //TODO smth
+                }
+
+
+//============= direct call==================
+
+
+               String phoneno = editTextNumber.getText().toString();
+                Intent i = new Intent(Intent.ACTION_CALL);
+                i.setData(Uri.parse("tel:"+phoneno));
+                startActivity(i);
+
+
+
+            }
+
+
+
+
+            });
+
+

@@ -1,0 +1,75 @@
+  <style name="CustomProgressBarHorizontal" parent="android:Widget.ProgressBar.Horizontal">
+
+        <item name="android:minHeight">10dip</item>
+        <item name="android:maxHeight">20dip</item>
+    </style>
+
+
+  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/bdflag"
+        android:scaleType="fitXY"
+        />
+    <ProgressBar
+
+        android:progressBackgroundTint="#0048FF"
+        android:maxHeight="30dp"
+        android:progressTint="#FF4081"
+        android:id="@+id/progress"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        style="@style/CustomProgressBarHorizontal"
+
+        />
+
+
+public class Salashscreen extends AppCompatActivity {
+    ProgressBar progressbar;
+    int progressint;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
+        setContentView(R.layout.activity_salashscreen);
+        progressbar = (ProgressBar) findViewById(R.id.progress);
+        // progressbar.setScaleY(3f);
+
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dowork();
+                stratactivity();
+            }
+
+
+        });
+        thread.start();
+
+    }
+
+    private void dowork() {
+        for (progressint = 10; progressint <=100; progressint+=1) {
+
+            try {
+                Thread.sleep(50);
+                progressbar.setProgress(progressint);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+
+            }
+
+        }
+    }
+    private void stratactivity() {
+        Intent intent=new Intent(Salashscreen.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+}

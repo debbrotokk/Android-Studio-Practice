@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/listviewlayout"
+    >
+
+    <TextView
+        android:textColorHint="@color/black"
+        android:id="@+id/listviewtext"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Debbroto"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:background="#FF4081"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        />
+</LinearLayout>///==========================
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".listview"
+    android:orientation="vertical"
+    android:background="@color/white"
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A9FF4081"
+        android:id="@+id/toolbar"
+        app:title="Debbroto"
+        app:subtitle="karmokar"
+        app:logo="@drawable/camera"
+        app:titleMarginStart="50dp"
+        app:popupTheme="@style/AppTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ListView
+
+        android:listSelector="#3C000000"
+        android:dividerHeight="2dp"
+        android:divider="#69F0AE"
+        android:id="@+id/listview"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        />
+
+
+</LinearLayout>
+
+
+
+
+///===========================
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <item
+        android:id="@+id/search"
+        android:title="setting"
+        app:showAsAction="always"
+        android:icon="@drawable/search"
+        app:actionViewClass="android.widget.SearchView"
+
+        />
+    <!--        app:showAsAction="always"-->
+<item
+    android:id="@+id/setting"
+    android:title="setting"
+      android:icon="@drawable/bdflag"
+    app:showAsAction="always"
+
+    />
+    <item
+        android:id="@+id/shareid"
+        android:title="share"
+        app:showAsAction="never"
+
+        />
+    <item
+        android:id="@+id/feedbackid"
+        android:title="feedbackid"
+        app:showAsAction="never"
+
+        />
+    <item
+        android:id="@+id/aboutusid"
+        android:title="aboutus"
+        app:showAsAction="never"
+
+        />
+</menu>
+
+
+////=====================
+
+
+public class listview extends AppCompatActivity {
+    ArrayAdapter<String> adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listview);
+        Toolbar toolbar;
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        ListView listView;
+        listView=findViewById(R.id.listview);
+
+
+
+        String[] countryname1=getResources().getStringArray(R.array.countryname);
+
+        //  String[] countryname1={"debbroto","kumar","karmokar"};
+
+
+      adapter=new ArrayAdapter<String>(listview.this,R.layout.listviewitem,R.id.listviewtext,countryname1);
+
+        // aita korleo hbe
+
+        // ArrayAdapter<String> adapter=new ArrayAdapter<String>(listview.this,R.layout.listviewitem,R.id.listviewtext,getResources().getStringArray(R.array.countryname));
+
+        listView.setAdapter(adapter);
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Toast.makeText(listview.this,"item position "+(position+1),Toast.LENGTH_SHORT).show();
+                String  value=countryname1[position];
+                Toast.makeText(listview.this,value,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menuitem,menu);
+        MenuItem menuItem=menu.findItem(R.id.search);
+        SearchView searchView;
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+
+                return false;
+            }
+        });
+
+
+
+        //getMenuInflater().inflate(R.menu.menuitem, menu);
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+
+        if(item.getItemId()==R.id.setting)
+        {
+            Toast.makeText(listview.this,"Setting select ",Toast.LENGTH_SHORT).show();
+        }
+        else if(item.getItemId()==R.id.shareid)
+        {
+            Toast.makeText(listview.this,"share select ",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

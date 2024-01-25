@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Loginpage"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+
+    <Button
+        android:onClick="deba"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:onClick="deb"
+        android:id="@+id/Signup"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Go to signup"
+
+        android:background="#FF4081"
+        />
+
+
+</LinearLayout>
+
+package com.to.firabase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+
+public class Loginpage extends AppCompatActivity {
+    EditText editTextTextPassword,editTextText;
+    TextView textView;
+    Button button;
+ProgressBar progressBar;
+    FirebaseAuth mauth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_loginpage);
+        editTextText = findViewById(R.id.editTextText);
+        editTextTextPassword = findViewById(R.id.editTextTextPassword);
+        textView = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
+        progressBar = findViewById(R.id.progressBar);
+        mauth = FirebaseAuth.getInstance();
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = editTextText.getText().toString();
+                String password = editTextTextPassword.getText().toString();
+                //   progressBar.setVisibility(View.VISIBLE);
+                if (email.isEmpty()) {
+                    editTextText.setError("Enter an email address");
+                    editTextText.requestFocus();
+                    return;
+                }
+
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextText.setError("Enter a valid email address");
+                    editTextText.requestFocus();
+                    return;
+                }
+
+                //checking the validity of the password
+                if (password.isEmpty()) {
+                    editTextTextPassword.setError("Enter a password");
+                    editTextTextPassword.requestFocus();
+                    return;
+                }
+                if (password.length() < 6) {
+
+                    editTextTextPassword.setError("Min length 6");
+                    editTextTextPassword.requestFocus();
+                    return;
+                }
+                progressBar.setVisibility(View.VISIBLE);
+
+
+mauth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    @Override
+    public void onComplete(@NonNull Task<AuthResult> task) {
+        progressBar.setVisibility(View.GONE);
+
+        progressBar.setVisibility(View.GONE);
+        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+            Toast.makeText(Loginpage.this, "already acho", Toast.LENGTH_SHORT).show();
+        }
+        else if (task.isSuccessful()) {
+            Toast.makeText(Loginpage.this, "is sucess", Toast.LENGTH_SHORT).show();
+
+            Intent intent =new Intent(Loginpage.this,MainActivity2.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+
+            Toast.makeText(Loginpage.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+});
+
+            }    } );
+
+
+
+
+
+
+
+
+    }
+
+
+    public void deb(View view) {
+        Intent intent=new Intent(Loginpage.this,Signup.class);
+        startActivity(intent);
+
+    }
+}

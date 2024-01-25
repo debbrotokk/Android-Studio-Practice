@@ -1,0 +1,174 @@
+audio raw folder er modde dite hbe
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Salashscreen"
+    android:orientation="vertical"
+    >
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:src="@drawable/bdflag"
+    android:scaleType="fitXY"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/black"
+        >
+        <TextView
+            android:background="@color/black"
+            android:id="@+id/positionid"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+
+            />
+        <TextView
+            android:background="@color/black"
+            android:id="@+id/durationid"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:text="234"
+          android:textAlignment="center"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="30dp"
+
+            />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+       android:layout_gravity="center_horizontal"
+        android:background="@color/black"
+        >
+    <ImageButton
+        android:background="@color/black"
+        android:id="@+id/play"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/baseline_queue_play_next_24"
+        android:scaleType="fitXY"
+        android:layout_margin="30dp"
+
+        />
+    <ImageButton
+        android:background="@color/black"
+        android:id="@+id/stop"
+        android:layout_margin="30dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/stop"
+        android:scaleType="fitXY"
+        />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+package com.to.learnanisul;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
+
+import org.w3c.dom.Text;
+
+public class Salashscreen extends AppCompatActivity implements View.OnClickListener {
+    ImageView stop,play;
+    MediaPlayer audio;
+    int playbackPosition = 0;
+    int duration;
+    TextView auuidurationid,positionid;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_salashscreen);
+        auuidurationid=findViewById(R.id.durationid);
+        positionid=findViewById(R.id.positionid);
+
+        stop=findViewById(R.id.stop);
+        play=findViewById(R.id.play);
+        audio=MediaPlayer.create(this,R.raw.deb);
+
+        duration= audio.getDuration()/1000;
+        auuidurationid.setText(" "+duration);
+        play.setOnClickListener(this);
+        stop.setOnClickListener(this);
+        playbackPosition = audio.getCurrentPosition();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.stop){
+            audio.pause();
+            Toast.makeText(this, "push", Toast.LENGTH_SHORT).show();
+            playbackPosition = audio.getCurrentPosition();
+            positionid.setText(" "+playbackPosition/1000);
+        }
+        else if (view.getId() == R.id.play) {
+            if (audio != null) {
+                if (!audio.isPlaying()) {
+                    // Check if audio is not playing, then start from the saved position
+                    audio.seekTo(playbackPosition);
+                    audio.start();
+                    Toast.makeText(this, "Audio started", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Audio is already playing", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+    }
+    protected void onPause() {
+        super.onPause();
+        // Check if audio is playing and stop it when the activity is paused
+        if (audio != null && audio.isPlaying()) {
+            audio.pause();
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        if(audio!=null && audio.isPlaying())
+        {
+            audio.stop();
+            audio.release();
+            audio=null;
+        }
+
+        super.onDestroy();
+    }
+}

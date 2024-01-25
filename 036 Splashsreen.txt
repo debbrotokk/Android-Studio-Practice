@@ -1,0 +1,20 @@
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/bdflag"
+        android:scaleType="fitXY"
+        />
+
+  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
+        setContentView(R.layout.activity_salashscreen);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Start another activity after 2 seconds
+                startActivity(new Intent(Salashscreen.this, MainActivity.class));
+                finish();
+            }
+        }, 4000);
+

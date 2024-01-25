@@ -1,0 +1,37 @@
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        android:textSize="20dp"
+        android:hint="Enter Country Name"
+        android:textColorHint="#57FFFFFF"
+        android:id="@+id/autoComplete"/>
+
+   <string-array name="countryname">
+<item>bangla</item>
+        <item>banhui</item>
+        <item> Bd</item>
+        <item>India</item>
+        <item> pk</item>
+        <item> vutan</item>
+        <item>napal </item>
+
+    </string-array>
+
+
+        AutoCompleteTextView autoComplete;
+        autoComplete=findViewById(R.id.autoComplete);
+        String []countrname=getResources().getStringArray(R.array.countryname);
+        ArrayAdapter <String> adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,countrname);
+            autoComplete.setThreshold(1);
+                autoComplete.setAdapter(adapter);
+          autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                  String value=countrname[i];
+                  Toast.makeText(Salashscreen.this, value, Toast.LENGTH_SHORT).show();
+              }
+          });

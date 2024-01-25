@@ -1,0 +1,13 @@
+ <style name="Base.Theme.Learnanisul" parent="Theme.AppCompat.DayNight">
+
+    <style name="Base.Theme.Learnanisul" parent="Theme.AppCompat.NoActionBar">
+
+    <style name="Base.Theme.Learnanisul" parent="Theme.Material3.DayNight.NoActionBar">
+
+ // remove title
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // remove the notification bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+                );
+

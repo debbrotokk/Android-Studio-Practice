@@ -1,0 +1,68 @@
+   <activity
+            android:name=".Graidview"
+            android:exported="false"
+
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+         
+   />
+
+    <TextView
+        android:textColor="@color/black"
+        android:gravity="center"
+       android:textSize="30dp"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello Bro" />
+
+    <Button
+        android:onClick="pip"
+        android:visibility="visible"
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:padding="30dp"
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:text="Smaller" />
+
+
+
+public class Graidview extends AppCompatActivity {
+    public void pip(View view) {
+        enterPictureInPictureMode();
+    }
+    TextView textView;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_graidview);
+        textView=findViewById(R.id.textView);
+        button=findViewById(R.id.button3);
+
+
+    }
+
+
+    @Override
+    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode);
+        if (isInPictureInPictureMode){
+            button.setVisibility(View.GONE);
+           // getSupportActionBar().hide();
+            textView.setText("Baby");
+
+        }
+
+            else{
+            button.setVisibility(View.VISIBLE);
+            textView.setText("Baby");
+
+        }
+
+    }
+}

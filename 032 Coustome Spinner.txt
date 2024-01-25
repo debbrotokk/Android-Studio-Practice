@@ -1,0 +1,208 @@
+ <string-array name="countryname">
+
+        <item> Bd</item>
+        <item>India</item>
+        <item> pk</item>
+        <item> vutan</item>
+        <item>napal </item>
+
+    </string-array>
+    <string-array name="population">
+
+        <item> 15k</item>
+        <item>18k</item>
+        <item> 18m</item>
+        <item> 198k</item>
+        <item>19,0000 </item>
+
+    </string-array>
+
+//item
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="87dp"
+    android:background="#FFFFFF"
+    android:orientation="horizontal"
+    android:id="@+id/listviewlayout"
+    android:weightSum="6"
+    android:layout_margin="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/countryimageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:src="@drawable/napal"
+
+        />
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/countrytext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Debbroto"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#FF4081"
+
+            />
+
+        <TextView
+            android:id="@+id/countrypopulationtext"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:text="debbroto kumar karmokar"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
+//layout
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".spinar"
+    android:orientation="vertical"
+    >
+
+    <Spinner
+
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+
+        />
+
+
+
+</LinearLayout>
+
+
+//java
+
+
+public class spinar extends AppCompatActivity {
+    Boolean isFirstselection = true;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_spinar);
+        String[] population;
+        Spinner spinner;
+        TextView textView;
+        Button button;
+        spinner = findViewById(R.id.spinner);
+
+
+
+        population = getResources().getStringArray(R.array.population);
+
+        int flag[] = {
+                R.drawable.bdflag, R.drawable.indianflag, R.drawable.pkflaf, R.drawable.vutan, R.drawable.napal};
+        String[] countryname1 = getResources().getStringArray(R.array.countryname);
+        Coustomeadapter adapter = new Coustomeadapter(this, countryname1, population, flag);
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String value = countryname1[i];
+
+                if (isFirstselection == true) {
+
+                    isFirstselection = false;
+                }
+                else{
+                    Toast.makeText(spinar.this, value, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+    }
+}
+
+
+//Coustomeadapter ================
+
+
+
+public class Coustomeadapter extends BaseAdapter {
+    Context context;
+    int []flags;
+    String []countrname;
+    String []population;
+    LayoutInflater inflater;
+    Coustomeadapter(Context context,String []countrname, String []population,int []flags){
+        this.context=context;
+        this.countrname=countrname;
+        this.population= population;
+        this.flags=flags;
+
+
+
+    }
+
+
+    @Override
+    public int getCount() {
+        return countrname.length;
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        if(view==null){
+            inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view= inflater.inflate(R.layout.samplspiner,viewGroup,false);
+
+        }
+
+    ImageView imageView= view.findViewById(R.id.countryimageview);
+        TextView textView =view.findViewById(R.id.countrytext);
+        TextView countrypopulationtext =view.findViewById(R.id.countrypopulationtext);
+        imageView.setImageResource(flags[i]);
+        textView.setText(countrname[i]);
+        countrypopulationtext.setText(population[i]);
+        return view;
+    }
+}
+
+
+

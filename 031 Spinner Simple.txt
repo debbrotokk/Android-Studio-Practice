@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".spinar"
+    android:orientation="vertical"
+    >
+
+    <Spinner
+
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+
+        />
+    <Button
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/button"
+        android:text="Button"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text"
+        />
+
+
+</LinearLayout>
+
+
+// Sample lay
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textsample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="debbroto"
+        android:textSize="30dp"
+        android:padding="20dp"
+        android:textColor="@color/black"
+        />
+
+</LinearLayout>
+
+
+// array
+
+  <string-array name="countryname">
+
+        <item> Bd</item>
+        <item>India</item>
+        <item> pk</item>
+        <item> vutan</item>
+        <item>napal </item>
+
+    </string-array>
+
+
+//
+
+
+
+package com.to.learnanisul;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class spinar extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_spinar);
+        String []countryname;
+        Spinner spinner;
+        TextView textView;
+        Button button;
+        spinner=findViewById(R.id.spinner);
+        button=findViewById(R.id.button);
+        textView=findViewById(R.id.text);
+
+
+
+        countryname=getResources().getStringArray(R.array.countryname);
+
+
+        ArrayAdapter <String> adapter= new ArrayAdapter<String>(spinar.this,R.layout.samplspiner,R.id.textsample,countryname);
+        spinner.setAdapter(adapter);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value= spinner.getSelectedItem().toString();
+                textView.setText(value);
+            }
+        });
+
+    }
+}
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:onClick="deb"
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Logout"
+        android:textSize="40dp"/>
+</LinearLayout>
+package com.to.firabase;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity2 extends AppCompatActivity {
+    FirebaseAuth mauth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+        mauth = FirebaseAuth.getInstance();
+    }
+
+    public void deb(View view) {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        Intent intent=new Intent(MainActivity2.this,Signup.class);
+        startActivity(intent);
+
+
+    }
+}
