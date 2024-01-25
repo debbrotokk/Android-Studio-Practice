@@ -1,3 +1,10 @@
+git init
+git add .
+git commit -m"asd"
+git push
+
+
+
 echo "# Android-Studio-Practice" >> README.md
 git init
 git add README.md
