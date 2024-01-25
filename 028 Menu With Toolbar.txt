@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 res-> android resourse directory-> resource type menu->
 menu->new-> menu resourse file -> nameset
 
@@ -125,4 +126,133 @@ public class menuhere extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+=======
+res-> android resourse directory-> resource type menu->
+menu->new-> menu resourse file -> nameset
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+<item
+    android:id="@+id/setting"
+    android:title="setting"
+      android:icon="@drawable/bdflag"
+    app:showAsAction="always"
+
+    />
+    <item
+        android:id="@+id/shareid"
+        android:title="share"
+        app:showAsAction="never"
+
+        />
+    <item
+        android:id="@+id/feedbackid"
+        android:title="feedbackid"
+        app:showAsAction="never"
+
+        />
+    <item
+        android:id="@+id/aboutusid"
+        android:title="aboutus"
+        app:showAsAction="never"
+
+        />
+</menu>
+
+// menu er color change krar jonno 
+
+themes.xml a code likte hbe
+
+ <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:itemBackground">#EEFF41</item>
+        <item name="android:textColor">#FF4081</item>
+    </style>
+
+
+
+// xml=================
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menuhere"
+    android:orientation="vertical"
+    >
+
+  <androidx.appcompat.widget.Toolbar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+     android:background="#A9FF4081"
+      android:id="@+id/toolbar"
+      app:title="Debbroto"
+      app:subtitle="karmokar"
+      app:logo="@drawable/camera"
+      app:titleMarginStart="50dp"
+
+     app:popupTheme="@style/AppTheme"
+      android:theme="@style/ThemeOverlay.AppCompat.Light">
+    <TextView
+        android:id="@+id/custom_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="omago true love"
+        android:textColor="#D61010"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>
+
+//================
+
+
+public class menuhere extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menuhere);
+        Toolbar toolbar;
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       // MenuInflater menuInflater=getMenuInflater();
+        //menuInflater.inflate(R.menu.menuitem,menu);
+
+        //return super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menuitem,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.setting)
+        {
+            Toast.makeText(menuhere.this,"Setting select ",Toast.LENGTH_SHORT).show();
+        }
+
+
+        else if(item.getItemId()==R.id.shareid)
+        {
+            Toast.makeText(menuhere.this,"share select ",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+>>>>>>> 357a61372b8a801f59ebe2eb03631bab780ee0e7
 }
